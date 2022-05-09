@@ -4,7 +4,7 @@ Generates a web page with basic info of the interested party.
 # README Generator
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
-Automatic README generator
+Team viewer
 ## Table of Contents 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -19,7 +19,7 @@ npm install inquirer and have node installed
 ```
 ## Usage
 Generate a simple team viewer to add a few members of your organization to for quick access. 
-## License
+
 ## License
     
   Copyright <YEAR> <COPYRIGHT HOLDER>
