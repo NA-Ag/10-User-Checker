@@ -1,32 +1,69 @@
 /* Variables start here */ 
 const inquirer = require('inquirer');
 const fs = require('fs');
-const genHTML = require("./src/generateHTML.js");
+const generateHTML = require("./src/generateHTML.js");
 
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
 
-var team = [];
+let team = [];
 
-/* Variables end here */
+// Stack overflow solution to email validation implemented. 
+// https://stackoverflow.com/questions/65189877/how-can-i-validate-that-a-user-input-their-email-when-using-inquirer-npm
 
-// Questions for the manager (assuming they are the one using the app)
+// const memberQuestions = [
+//     {
+//         type: 'list',
+//         messaage: 'What is your role?',
+//         name: 'role',
+//         choices: ['Manager', 'Engineer', 'Intern']
+//     },
+//     {
+//         type: 'input',
+//         message: 'What is your name?',
+//         name: 'name'
+//     },
+//     {
+//         type: 'input',
+//         message: 'What is your ID number?',
+//         name: 'id'
+//     },
+//     {
+//         type: 'input',
+//         message: 'What is your email address?',
+//         name: 'email',
+//         validate: function(email)
+//         {
+//             // Regex mail check (return true if valid mail)
+//             return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+//         }
+//     },
+//     {
+//         type: 'input',
+//         message: "Additional info i.e manager's office, engineer's github or intern's school",
+//         name: "extra"
+//     }
+// ];
+// For future update into single object
+
+
+// Manager Questions
 const managerQuestions = [
     {
         type: 'input',
-        name: 'managername',
-        message: "This command line app will generate a roster page for your team. First, what is the team manager's name?"
+        name: 'managerName',
+        message: "Input Team Manager's name"
     },
     {
         type: 'input',
-        name: 'managerid',
-        message: "What is the team manager's employee ID?"
+        name: 'managerId',
+        message: "Input Team Manager's Id?"
     },
     {
         type: 'input',
-        name: 'manageremail',
-        message: "What is the team manager's email?",
+        name: 'managerEmail',
+        message: "Input Team Manager's email",
         validate: function(manageremail)
         {
             return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(manageremail);
@@ -34,27 +71,27 @@ const managerQuestions = [
     },
     {
         type: 'input',
-        name: 'manageroffice',
-        message: "What is the team manager's office number?"
+        name: 'managerOffice',
+        message: "Input Team Manager's office number"
     }
 ];
 
-// Questions to get Engineer info
+// Engineer Questions
 const engineerQuestions = [
     {
         type: 'input',
-        name: 'engineername',
-        message: "What is the engineer's name?"
+        name: 'engineerName',
+        message: "Input Engineer's name"
     },
     {
         type: 'input',
-        name: 'engineerid',
-        message: "What is the engineer's employee ID?"
+        name: 'engineerId',
+        message: "Input Engineer Id"
     },
     {
         type: 'input',
-        name: 'engineeremail',
-        message: "What is the engineer's email?",
+        name: 'engineerEmail',
+        message: "Input Engineer's email",
         validate: function(engineeremail)
         {
             return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(engineeremail);
@@ -62,27 +99,27 @@ const engineerQuestions = [
     },
     {
         type: 'input',
-        name: 'engineergithub',
-        message: "What is the engineer's Github?"
+        name: 'engineerGithub',
+        message: "Input Engineer's Github"
     }
 ];
 
-// Questions to get Intern info
+// Intern Questions
 const internQuestions = [
     {
         type: 'input',
-        name: 'internname',
-        message: "What is the intern's name?"
+        name: 'internName',
+        message: "Input Intern's name"
     },
     {
         type: 'input',
-        name: 'internid',
-        message: "What is the intern's employee ID?"
+        name: 'internId',
+        message: "Input Intern's Id"
     },
     {
         type: 'input',
-        name: 'internemail',
-        message: "What is the intern's email?",
+        name: 'internEmail',
+        message: "Input Intern's email",
         validate: function(internemail)
         {
             return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(internemail);
@@ -90,82 +127,76 @@ const internQuestions = [
     },
     {
         type: 'input',
-        name: 'internschool',
-        message: "What is the intern's school?"
+        name: 'internSchool',
+        message: "Input Intern's school"
     }
 ];
+/* Variables end here */
 
-// The manager will be prompted these questions if they would like to add Employees
-// If they are done, generate the HTML file
+/* Functions start here */
 function addEmployee() {
     inquirer
         .prompt([
             {
                 type: 'list',
-                name: 'addmember',
-                message: 'Which type of team member would you like to add?',
-                choices: ['Engineer', 'Intern', "I am done adding team members"]
+                name: 'addMember',
+                message: 'Specify who you would like to add',
+                choices: ['Engineer', 'Intern', "None, i don't want to add another member"]
             }
         ])
         .then((answers) => {
-            if (answers.addmember === "Engineer") {
-                addEngineer();
-            } else if (answers.addmember === "Intern") {
-                addIntern();
-            } else {
+            if (answers.addMember === "Engineer") 
+            {
+                inquirer
+                    .prompt(engineerQuestions)
+                    .then((answer) => {
+                        const engineer = new Engineer(answer.engineerName, answer.engineerId, answer.engineerEmail, answer.engineerGithub)
+                        team.push(engineer);
+                        addEmployee();
+                    })
+                    .catch((err) => console.log(err))
+            } 
+
+            else if (answers.addMember === "Intern") 
+            {
+                inquirer
+                    .prompt(internQuestions)
+                    .then((answer) => {
+                        const intern = new Intern(answer.internName, answer.internId, answer.internEmail, answer.internSchool)
+                        team.push(intern);
+                        addEmployee();
+                    })
+                    .catch((err) => console.log(err))
+            } 
+
+            else
+            {
                 console.log(team)
-                writeToFile("./dist/roster.html", team)
-                // console.log(team[0].getRole())
-                // console.log(team[0] instanceof Manager)
+                writeToFile("./dist/index.html", team)
                 return;
             }
         })
         .catch((err) => console.log(err))
 }
 
-// Adds an instance of Engineer to the team array
-function addEngineer() {
-    inquirer
-        .prompt(engineerQuestions)
-        .then((answer) => {
-            const engineer = new Engineer(answer.engineername, answer.engineerid, answer.engineeremail, answer.engineergithub)
-            team.push(engineer);
-            addEmployee();
-        })
-        .catch((err) => console.log(err))
-}
-
-// Adds an instance of Intern to the team array
-function addIntern() {
-    inquirer
-        .prompt(internQuestions)
-        .then((answer) => {
-            const intern = new Intern(answer.internname, answer.internid, answer.internemail, answer.internschool)
-            team.push(intern);
-            addEmployee();
-        })
-        .catch((err) => console.log(err))
-}
-
-// Function to write HTML
 function writeToFile(fileName, data) {
-    let teamInfo = genHTML(data);
+    let teamInfo = generateHTML(data);
     fs.writeFile(fileName, teamInfo, (err) => {
-        err ? console.log(err) : console.log("COOK IT UP COOK IT UP");
+        err ? console.log(err) : console.log("Members updated succesgfully");
     })
 }
 
-// Function to initialize app
+
 function init() {
     inquirer
         .prompt(managerQuestions)
         .then((answer) => {
-            const manager = new Manager(answer.managername, answer.managerid, answer.manageremail, answer.manageroffice)
+            const manager = new Manager(answer.managerName, answer.managerId, answer.managerEmail, answer.managerOffice)
             team.push(manager);
             addEmployee();
         })
         .catch((err) => console.log(err))
 }
 
-// Function call to initialize app
+/* Functions end here */
 init();

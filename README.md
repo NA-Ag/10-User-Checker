@@ -1,8 +1,6 @@
 # 10-Assignment-User-Checker
 Generates a web page with basic info of the interested party. 
 
-
-
 # README Generator
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
@@ -20,7 +18,7 @@ To install necessary dependencies, follow the next steps and run these commands:
 npm install inquirer and have node installed
 ```
 ## Usage
-Generate README files for your programs
+Generate a simple team viewer to add a few members of your organization to for quick access. 
 ## License
 ## License
     
@@ -38,6 +36,6 @@ To run tests, run the following command:
 ```bash
 node and your file
 ```
-screenshot  ![](./Images/06-screenshot-working.PNG)
-link to repository (https://github.com/NA-Ag/09-Assignment-Auto-ReadMe)
-link to video (https://drive.google.com/file/d/1Ttw0_OXm5IhNnK7nAczhWMAtnkL0nG6W/view)
+screenshot  ![](./10-screenshot-working.PNG)
+link to repository (https://github.com/NA-Ag/10-Assignment-User-Checker)
+link to video (https://drive.google.com/file/d/1nhm_JwLHhIziACgi8M1WUuBw73Yx00r5/view)

@@ -1,0 +1,26 @@
+header {
+    height: 100px;
+    margin-top: -100px;
+    margin-bottom: 100px;
+    padding-top: 4px;
+    color: white;
+    background: rgb(255,185,43);
+    background: linear-gradient(315deg, rgba(255,185,43,1) 0%, rgba(203,0,0,1) 52%); 
+    text-align:center
+
+}
+
+.intern{
+    background: rgb(0,59,2);
+    background: linear-gradient(315deg, rgba(0,59,2,1) 0%, rgba(45,253,51,1) 100%); 
+}
+
+.engineer{
+    background: rgb(11,0,59);
+    background: linear-gradient(315deg, rgba(11,0,59,1) 0%, rgba(45,154,253,1) 100%); 
+}
+
+.manager{
+    background: rgb(57,59,0);
+    background: linear-gradient(315deg, rgba(57,59,0,1) 0%, rgba(224,253,45,1) 100%); 
+}

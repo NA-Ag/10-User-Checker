@@ -1,0 +1,28 @@
+{
+  "name": "10-assignment-user-checker",
+  "version": "1.0.0",
+  "description": "Node Team Setter",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NA-Ag/10-Assignment-User-Checker.git"
+  },
+  "keywords": [
+    "NA=Ag"
+  ],
+  "author": "Nathan Ag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NA-Ag/10-Assignment-User-Checker/issues"
+  },
+  "homepage": "https://github.com/NA-Ag/10-Assignment-User-Checker#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
