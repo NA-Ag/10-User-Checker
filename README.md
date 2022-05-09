@@ -1,10 +1,10 @@
 # 10-Assignment-User-Checker
 Generates a web page with basic info of the interested party. 
 
-# README Generator
+# Team Viewer
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ## Description
-Team viewer
+An app that generates cards of your team members
 ## Table of Contents 
 - [Installation](#installation)
 - [Usage](#usage)
