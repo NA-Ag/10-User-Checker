@@ -1,4 +1,4 @@
-# 10-Assignment-User-Checker
+# 10-User-Checker
 Generates a web page with basic info of the interested party. 
 
 # Team Viewer
@@ -37,5 +37,5 @@ To run tests, run the following command:
 node and your file
 ```
 screenshot  ![](./10-screenshot-working.PNG)
-link to repository (https://github.com/NA-Ag/10-Assignment-User-Checker)
+link to repository (https://github.com/NA-Ag/10-User-Checker)
 link to video (https://drive.google.com/file/d/1nhm_JwLHhIziACgi8M1WUuBw73Yx00r5/view)
